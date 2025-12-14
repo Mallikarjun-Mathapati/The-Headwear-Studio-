@@ -12,15 +12,67 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Product Specification Table Styles */
+.description-content table {
+  display: none; /* Hide any tables in description */
+}
+
+.specialization-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.specialization-table tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.specialization-table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.specialization-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.specialization-table td {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.specialization-table .spec-label {
+  font-weight: 600;
+  color: #374151;
+  width: 40%;
+}
+
+.specialization-table .spec-value {
+  color: #6b7280;
+  width: 60%;
+}
+
+@media (max-width: 768px) {
+  .specialization-table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
 }
