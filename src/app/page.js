@@ -49,8 +49,8 @@ export default async function Home() {
               <FaBoxOpen size={24} className="text-black" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-lg">Free Shipping</h3>
-              <p className="text-sm text-gray-500">
+              <h3 className="font-bold text-gray-900 text-base md:text-lg">Free Shipping</h3>
+              <p className="text-xs md:text-sm text-gray-500">
                 Free Shipping for orders over $99
               </p>
             </div>
@@ -60,10 +60,10 @@ export default async function Home() {
               <FaDollarSign size={24} className="text-black" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-lg">
+              <h3 className="font-bold text-gray-900 text-base md:text-lg">
                 Money Guarantee
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs md:text-sm text-gray-500">
                 Within 30 days for an exchange
               </p>
             </div>
@@ -73,10 +73,10 @@ export default async function Home() {
               <FaHeadset size={24} className="text-black" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-lg">
+              <h3 className="font-bold text-gray-900 text-base md:text-lg">
                 Online Support
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs md:text-sm text-gray-500">
                 24 hours a day, 7 days a week
               </p>
             </div>
@@ -86,10 +86,10 @@ export default async function Home() {
               <FaShieldAlt size={24} className="text-black" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-lg">
+              <h3 className="font-bold text-gray-900 text-base md:text-lg">
                 Flexible Payment
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs md:text-sm text-gray-500">
                 Pay with Multiple Credit Cards
               </p>
             </div>

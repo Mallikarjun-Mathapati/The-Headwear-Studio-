@@ -1,6 +1,11 @@
 import { fetchProducts } from "@/lib/api";
 import ProductCard from "@/components/product/ProductCard";
 
+export const metadata = {
+  title: "Search Products | THS",
+  description: "Search for hardware products at The Hardware Studio",
+};
+
 export default async function SearchPage({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   const query = resolvedSearchParams?.q || "";

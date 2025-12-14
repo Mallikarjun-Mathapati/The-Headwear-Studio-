@@ -21,6 +21,8 @@ const ProductGallery = ({ images = [] }) => {
           src={selectedImage || images[0].src}
           alt="Product Image"
           fill
+          sizes="(max-width: 768px) 100vw, 400px"
+          priority
           className="object-contain p-4"
         />
       </div>
@@ -41,6 +43,7 @@ const ProductGallery = ({ images = [] }) => {
               src={img.src}
               alt={img.alt || `Product thumbnail ${index + 1}`}
               fill
+              sizes="80px"
               className="object-cover"
             />
           </button>

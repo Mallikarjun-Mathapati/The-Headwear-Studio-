@@ -151,6 +151,8 @@ const Navbar = ({ categories = [] }) => {
               <button
                 className="lg:hidden text-gray-800"
                 onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? "Close menu" : "Open menu"}
+                aria-expanded={isOpen}
               >
                 {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
               </button>
@@ -226,6 +228,7 @@ const Navbar = ({ categories = [] }) => {
                 <button
                   type="submit"
                   className="px-6 text-gray-800 hover:text-[#D32F2F] transition-colors"
+                  aria-label="Search"
                 >
                   <FaSearch size={20} />
                 </button>
@@ -461,9 +464,31 @@ const Navbar = ({ categories = [] }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween" }}
-            className="fixed inset-0 z-[999] bg-white pt-20 px-4 overflow-y-auto lg:hidden"
+            className="fixed inset-0 z-[999] bg-white overflow-y-auto lg:hidden flex flex-col"
           >
-            <div className="space-y-6 pb-10">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-100">
+              <Link href="/" onClick={() => setIsOpen(false)}>
+                <div className="relative w-32 h-10">
+                  <Image
+                    src="/THS_Logo.png"
+                    alt="THS Logo"
+                    width={100}
+                    height={0}
+                    className="object-contain"
+                  />
+                </div>
+              </Link>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-gray-800 p-2"
+                aria-label="Close menu"
+              >
+                <FaTimes size={24} />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-6 pb-10">
               {/* Search Bar in Mobile Menu */}
               <form
                 onSubmit={handleSearch}
@@ -513,15 +538,6 @@ const Navbar = ({ categories = [] }) => {
                     </Link>
                   ))}
                 </div>
-              </div>
-
-              <div className="flex gap-4 pt-4">
-                <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-gray-300 rounded-lg font-medium text-gray-700">
-                  <FaRegHeart /> Wishlist
-                </button>
-                <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-black text-white rounded-lg font-medium">
-                  <FaUser /> Login
-                </button>
               </div>
             </div>
           </motion.div>

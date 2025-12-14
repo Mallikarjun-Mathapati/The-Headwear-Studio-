@@ -59,6 +59,7 @@ const Testimonials = () => {
                   src={review.image}
                   alt={review.name}
                   fill
+                  sizes="48px"
                   className="object-cover"
                 />
               </div>

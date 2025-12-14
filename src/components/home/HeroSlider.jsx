@@ -59,6 +59,7 @@ const HeroSlider = () => {
             src={slides[current].image}
             alt={slides[current].title}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -87,7 +88,7 @@ const HeroSlider = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="text-lg mb-8 text-white drop-shadow-md"
+                className="text-base md:text-lg mb-8 text-white drop-shadow-md"
               >
                 {slides[current].description}
               </motion.p>

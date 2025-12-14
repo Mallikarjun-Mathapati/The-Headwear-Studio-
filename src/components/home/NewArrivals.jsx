@@ -31,16 +31,16 @@ const NewArrivals = ({ products: initialProducts, categories }) => {
 
   return (
     <Section className="bg-white pt-12">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-8">
-        <h2 className="text-3xl font-bold text-gray-900">New Arrivals</h2>
-        <div className="flex gap-6 text-sm font-medium text-gray-500 mt-4 md:mt-0 overflow-x-auto pb-2 md:pb-0">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 md:gap-0">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">New Arrivals</h2>
+        <div className="w-full md:w-auto flex gap-3 md:gap-6 text-sm font-medium text-gray-500 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
           <button
             onClick={() => handleCategoryChange("all")}
             className={`${
               activeCategory === "all"
                 ? "text-white bg-[#D32F2F] shadow-sm"
-                : "hover:text-[#D32F2F]"
-            } px-4 py-1.5 rounded-full transition-colors whitespace-nowrap`}
+                : "hover:text-[#D32F2F] bg-gray-100 md:bg-transparent"
+            } px-5 py-2 rounded-full transition-colors whitespace-nowrap flex-shrink-0`}
           >
             All
           </button>
@@ -51,8 +51,8 @@ const NewArrivals = ({ products: initialProducts, categories }) => {
               className={`${
                 activeCategory === cat.id
                   ? "text-white bg-[#D32F2F] shadow-sm"
-                  : "hover:text-[#D32F2F]"
-              } px-4 py-1.5 rounded-full transition-colors whitespace-nowrap`}
+                  : "hover:text-[#D32F2F] bg-gray-100 md:bg-transparent"
+              } px-5 py-2 rounded-full transition-colors whitespace-nowrap flex-shrink-0`}
             >
               {cat.name}
             </button>

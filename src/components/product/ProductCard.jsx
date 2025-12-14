@@ -33,6 +33,7 @@ const ProductCard = ({ product, badge: customBadge }) => {
           src={imageUrl}
           alt={product.name}
           fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500 mix-blend-multiply"
         />
 
@@ -50,18 +51,21 @@ const ProductCard = ({ product, badge: customBadge }) => {
           <button
             className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-black hover:text-white shadow-sm transition-colors"
             title="Add to Wishlist"
+            aria-label="Add to Wishlist"
           >
             <FaRegHeart size={14} />
           </button>
           <button
             className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-black hover:text-white shadow-sm transition-colors"
             title="Compare"
+            aria-label="Compare products"
           >
             <FaLayerGroup size={14} />
           </button>
           <button
             className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-black hover:text-white shadow-sm transition-colors"
             title="Quick View"
+            aria-label="Quick view product"
           >
             <FaEye size={14} />
           </button>
@@ -75,12 +79,12 @@ const ProductCard = ({ product, badge: customBadge }) => {
             ? product.categories[0].name
             : "Product"}
         </div>
-        <h3 className="text-sm font-medium text-gray-900 line-clamp-1 mb-1 group-hover:text-[#D32F2F] transition-colors">
+        <h3 className="text-sm md:text-base font-medium text-gray-900 line-clamp-1 mb-1 group-hover:text-[#D32F2F] transition-colors">
           {product.name}
         </h3>
 
         {/* 1 Line Description */}
-        <p className="text-xs text-gray-500 line-clamp-1 mb-3 leading-relaxed">
+        <p className="text-xs md:text-sm text-gray-500 line-clamp-1 mb-3 leading-relaxed">
           {shortDesc ||
             "No description available for this product. Check details for more info."}
         </p>

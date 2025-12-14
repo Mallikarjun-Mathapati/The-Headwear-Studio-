@@ -11,17 +11,14 @@ const ProductFilters = ({ categories }) => {
   const [isPending, startTransition] = useTransition();
 
   const [isOpen, setIsOpen] = useState(false); // Mobile filter toggle
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
+  // Price range state removed
   const [expandedSections, setExpandedSections] = useState({
     categories: true,
-    price: true,
   });
 
   // Initialize state from URL
   useEffect(() => {
-    const min = searchParams.get("min_price") || 0;
-    const max = searchParams.get("max_price") || 1000;
-    setPriceRange({ min: Number(min), max: Number(max) });
+    // Price range initialization removed
   }, [searchParams]);
 
   const toggleSection = (section) => {
@@ -50,29 +47,7 @@ const ProductFilters = ({ categories }) => {
     setIsOpen(false);
   };
 
-  const handlePriceChange = (e) => {
-    const { name, value } = e.target;
-    setPriceRange((prev) => ({ ...prev, [name]: Number(value) }));
-  };
-
-  const applyPriceFilter = () => {
-    const params = new URLSearchParams(searchParams);
-    params.set("min_price", priceRange.min);
-    params.set("max_price", priceRange.max);
-    params.set("page", "1");
-
-    startTransition(() => {
-      router.push(`/products?${params.toString()}`, { scroll: false });
-    });
-
-    setTimeout(() => {
-      const element = document.getElementById("products-grid");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
-    setIsOpen(false);
-  };
+  // Price filter handlers removed
 
   const clearFilters = () => {
     startTransition(() => {
@@ -187,76 +162,6 @@ const ProductFilters = ({ categories }) => {
                         </li>
                       ))}
                     </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Price Filter Section */}
-            <div className="border-b border-gray-100">
-              <button
-                onClick={() => toggleSection("price")}
-                className="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <h3 className="font-bold text-gray-900">Price Range</h3>
-                {expandedSections.price ? (
-                  <FaChevronUp size={12} />
-                ) : (
-                  <FaChevronDown size={12} />
-                )}
-              </button>
-
-              <AnimatePresence>
-                {expandedSections.price && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-4">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="relative flex-1">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
-                            $
-                          </span>
-                          <input
-                            type="number"
-                            name="min"
-                            value={priceRange.min}
-                            onChange={handlePriceChange}
-                            className="w-full pl-6 pr-2 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F] transition-all"
-                            placeholder="Min"
-                          />
-                        </div>
-                        <span className="text-gray-300">-</span>
-                        <div className="relative flex-1">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">
-                            $
-                          </span>
-                          <input
-                            type="number"
-                            name="max"
-                            value={priceRange.max}
-                            onChange={handlePriceChange}
-                            className="w-full pl-6 pr-2 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#D32F2F] focus:ring-1 focus:ring-[#D32F2F] transition-all"
-                            placeholder="Max"
-                          />
-                        </div>
-                      </div>
-                      <button
-                        onClick={applyPriceFilter}
-                        disabled={isPending}
-                        className="w-full bg-black text-white py-2.5 rounded-lg text-sm font-bold hover:bg-[#D32F2F] active:scale-95 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center gap-2"
-                      >
-                        {isPending ? (
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        ) : (
-                          "Apply Filter"
-                        )}
-                      </button>
-                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>

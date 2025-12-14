@@ -1,16 +1,41 @@
 import { fetchProductBySlug, fetchProducts } from "@/lib/api";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import ProductGallery from "@/components/product/ProductGallery";
 import ProductInfo from "@/components/product/ProductInfo";
 import ProductSidebar from "@/components/product/ProductSidebar";
 import ProductCard from "@/components/product/ProductCard";
+
+// Generate dynamic metadata for SEO
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const product = await fetchProductBySlug(slug);
+
+  if (!product) {
+    return { title: "Product Not Found | THS" };
+  }
+
+  return {
+    title: `${product.name} | THS`,
+    description:
+      product.short_description?.replace(/<[^>]*>/g, "").slice(0, 160) ||
+      "Quality hardware product from The Hardware Studio",
+    openGraph: {
+      title: product.name,
+      description: product.short_description
+        ?.replace(/<[^>]*>/g, "")
+        .slice(0, 160),
+      images: product.images?.[0]?.src ? [product.images[0].src] : [],
+    },
+  };
+}
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
   const product = await fetchProductBySlug(slug);
 
   if (!product) {
-    return <div className="text-center py-20">Product not found</div>;
+    notFound();
   }
 
   // Fetch related products (same category or just latest)

@@ -7,20 +7,44 @@ import { fetchCategories } from "@/lib/api";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
-  title: "THS - The Hardware Studio",
-  description: "Modern hardware solutions for your home and office.",
+  title: {
+    default: "THS - The Hardware Studio",
+    template: "%s | THS",
+  },
+  description:
+    "Premium architectural hardware solutions for your home and office. Quality door handles, hinges, and fittings.",
+  keywords: [
+    "hardware",
+    "door handles",
+    "architectural hardware",
+    "home improvement",
+    "THS",
+  ],
+  authors: [{ name: "The Hardware Studio" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "The Hardware Studio",
+  },
 };
 
 export default async function RootLayout({ children }) {
-  const categories = await fetchCategories({ per_page: 20, parent: 0 });
+  let categories = [];
+  try {
+    categories = await fetchCategories({ per_page: 20, parent: 0 });
+  } catch (error) {
+    console.error("Failed to fetch categories for layout:", error);
+  }
 
   return (
     <html lang="en">
@@ -28,7 +52,7 @@ export default async function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navbar categories={categories} />
-        <div className="flex-grow">{children}</div>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
