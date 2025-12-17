@@ -1,15 +1,21 @@
 import { fetchProductBySlug, fetchProducts } from "@/lib/api";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import ProductGallery from "@/components/product/ProductGallery";
 import ProductInfo from "@/components/product/ProductInfo";
 import ProductSidebar from "@/components/product/ProductSidebar";
 import ProductCard from "@/components/product/ProductCard";
 
+// Cache the product fetch to deduplicate between generateMetadata and page component
+const getProduct = cache(async (slug) => {
+  return await fetchProductBySlug(slug);
+});
+
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const product = await fetchProductBySlug(slug);
+  const product = await getProduct(slug);
 
   if (!product) {
     return { title: "Product Not Found | THS" };
@@ -32,19 +38,22 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
-  const product = await fetchProductBySlug(slug);
+  const product = await getProduct(slug);
 
   if (!product) {
     notFound();
   }
 
-  // Fetch related products (same category or just latest)
+  // Fetch related products in parallel - don't block main render
   const categoryId = product.categories?.[0]?.id;
-  const relatedProducts = await fetchProducts({
+  const relatedProductsPromise = fetchProducts({
     per_page: 4,
     exclude: [product.id],
     category: categoryId,
   });
+
+  // Await related products (this runs in parallel with rendering prep)
+  const relatedProducts = await relatedProductsPromise;
 
   return (
     <main className="bg-white min-h-screen py-12">
