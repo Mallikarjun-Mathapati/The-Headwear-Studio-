@@ -49,7 +49,9 @@ export default async function Home() {
               <FaBoxOpen size={24} className="text-black" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-base md:text-lg">Free Shipping</h3>
+              <h3 className="font-bold text-gray-900 text-base md:text-lg">
+                Free Shipping
+              </h3>
               <p className="text-xs md:text-sm text-gray-500">
                 Free Shipping for orders over $99
               </p>

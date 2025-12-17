@@ -32,7 +32,9 @@ const NewArrivals = ({ products: initialProducts, categories }) => {
   return (
     <Section className="bg-white pt-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 md:gap-0">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">New Arrivals</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+          New Arrivals
+        </h2>
         <div className="w-full md:w-auto flex gap-3 md:gap-6 text-sm font-medium text-gray-500 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
           <button
             onClick={() => handleCategoryChange("all")}
